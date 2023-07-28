@@ -36,10 +36,14 @@ WHERE categories.Name = "appliances" OR  categories.Name = "games";
 
 /* joins: find the product name, total # sold, and total price sold,
  for Eagles: Hotel California --You may need to use SUM() */
- SELECT products.Name, Sum(sales.Quantity) as "Total Units Sold",Sum(sales.PricePerUnit * sales.Quantity) as "Total Price Sold"
+ select products.Name
+ /* this works now. Does return  7 rows but no sum */
+ /*select products.Name, Sum(sales.Quantity) This does not work. Issue is th sum */
+ /* select products.Name, Sum(sales.Quantity) as "Total Units Sold", Sum(sales.PricePerUnit * sales.Quantity) as "Total Price Sold" */
+ /*SELECT products.Name, Sum(sales.Quantity) as "Total Units Sold", Sum(sales.PricePerUnit * sales.Quantity) as "Total Price Sold" */
  FROM products
- INNER JOIN reviews
- ON products.productID = sales.productID
+ INNER JOIN sales
+ ON products.ProductID = sales.ProductID
  WHERE products.Name LIKE "%hotel%california%";
 
 /* joins: find Product name, reviewer name, rating, and comment on the Visio TV. (only return for the lowest rating!) */
