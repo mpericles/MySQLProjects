@@ -34,17 +34,7 @@ INNER JOIN departments
 ON categories.DepartmentID = departments.DepartmentID
 WHERE categories.Name = "appliances" OR  categories.Name = "games";
 
-/* joins: find the product name, total # sold, and total price sold,
- for Eagles: Hotel California --You may need to use SUM() */
- select products.Name
- /* this works now. Does return  7 rows but no sum */
- /*select products.Name, Sum(sales.Quantity) This does not work. Issue is th sum */
- /* select products.Name, Sum(sales.Quantity) as "Total Units Sold", Sum(sales.PricePerUnit * sales.Quantity) as "Total Price Sold" */
- /*SELECT products.Name, Sum(sales.Quantity) as "Total Units Sold", Sum(sales.PricePerUnit * sales.Quantity) as "Total Price Sold" */
- FROM products
- INNER JOIN sales
- ON products.ProductID = sales.ProductID
- WHERE products.Name LIKE "%hotel%california%";
+
 
 /* joins: find Product name, reviewer name, rating, and comment on the Visio TV. (only return for the lowest rating!) */
 SELECT products.Name, reviews.Reviewer, reviews.Rating, reviews.Comment
@@ -52,6 +42,15 @@ FROM products
 INNER JOIN reviews
 ON products.ProductID = reviews.ProductID
 WHERE products.Name LIKE "%visio%";
+
+/* joins: find the product name, total # sold, and total price sold, for Eagles: Hotel California --You may need to use SUM() */
+/*SELECT products.Name,  Sum(sales.Quantity) as "Total Units Sold",  Sum(sales.PricePerUnit * sales.Quantity) as "Total Price Sold" - This statement does not workk. Sum does not work in my compiler */  
+SELECT products.Name,  sales.Quantity as "Total Units Sold", sales.PricePerUnit * sales.Quantity as "Total Price Sold" 
+FROM products
+INNER JOIN sales ON products.ProductID = sales.ProductID
+WHERE products.Name LIKE "%hotel%california%" 
+GROUP BY products.Name, sales.Quantity, sales.PricePerUnit;
+
 
 
 -- ------------------------------------------ Extra - May be difficult
