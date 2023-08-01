@@ -44,12 +44,13 @@ ON products.ProductID = reviews.ProductID
 WHERE products.Name LIKE "%visio%";
 
 /* joins: find the product name, total # sold, and total price sold, for Eagles: Hotel California --You may need to use SUM() */
-/*SELECT products.Name,  Sum(sales.Quantity) as "Total Units Sold",  Sum(sales.PricePerUnit * sales.Quantity) as "Total Price Sold" - This statement does not workk. Sum does not work in my compiler */  
-SELECT products.Name,  sales.Quantity as "Total Units Sold", sales.PricePerUnit * sales.Quantity as "Total Price Sold" 
+SELECT products.Name,  Sum(sales.Quantity) as "Total Units Sold",  Sum(sales.PricePerUnit * sales.Quantity) as "Total Price Sold"
+/*SELECT products.Name,  sales.Quantity as "Total Units Sold", sales.PricePerUnit * sales.Quantity as "Total Price Sold" */
 FROM products
 INNER JOIN sales ON products.ProductID = sales.ProductID
-WHERE products.Name LIKE "%hotel%california%" 
-GROUP BY products.Name, sales.Quantity, sales.PricePerUnit;
+/*WHERE products.Name LIKE "%hotel%california%" */
+Where products.Name = "Eagles: Hotel California";
+/*GROUP BY products.Name, sales.Quantity, sales.PricePerUnit;*/
 
 
 
